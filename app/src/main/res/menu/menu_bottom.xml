@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Plant list"
+        android:id="@+id/userTab"
+        android:enabled="true"
+        app:showAsAction="always" />
+
+    <item android:title="Calendar"
+        android:id="@+id/calTab"
+        android:checked="true"
+        android:enabled="true"
+        app:showAsAction="always" />
+
+    <item android:title="Today's daily"
+        android:id="@+id/statTab"
+        app:showAsAction="always"
+        android:enabled="true" />
+</menu>
