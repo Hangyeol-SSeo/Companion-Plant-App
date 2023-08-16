@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 /*
  * 상단 메뉴
  * 설정, qr코드 생성, 검색(?)
@@ -31,5 +33,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        BottomNavigationView bottomNavigationView = binding.bnv;
+//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+//        NavigationUI.setupWithNavController(botoomNavigationView, navHostFragment.getNavController());
     }
 }

@@ -1,20 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/item_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+    <ImageView
+        android:id="@+id/list_plant_image"
+        android:layout_width="154dp"
+        android:layout_height="154dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/fragment_item_circle"
+        android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="18dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/list_condition_flag"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:src="@drawable/fragment_item_statement_red"/>
+
+        <TextView
+            android:id="@+id/list_plant_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:textSize="16sp"
+            android:hint="User setting name"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:id="@+id/list_plant_realname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paragraph_margin"
+            android:textSize="12sp"
+            android:fontFamily="@font/sofiasans_regular"
+            android:hint="Plant real name"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceListItem" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:textSize="14sp"
+            android:text="SUNLIGHT" />
+
+        <ProgressBar
+            android:id="@+id/list_Moisture_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paragraph_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:textSize="14sp"
+            android:text="WATER" />
+
+        <ProgressBar
+            android:id="@+id/list_sunlight_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paragraph_margin"/>
+
+    </LinearLayout>
+
 </LinearLayout>
