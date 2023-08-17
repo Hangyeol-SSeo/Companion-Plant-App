@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tab.PlantDetail">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <!-- Your View, which will have a width of 125% of the screen size -->
+        <ImageView
+            android:id="@+id/item_detail_background_circle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/fragment_item_circle_background"
+            app:layout_constraintDimensionRatio="W,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1.25" />
+
+        <ImageView
+            android:id="@+id/item_detail_background_rect"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#DAE5D9"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="57dp"
+            android:fontFamily="@font/sofiasans_regular"
+            android:text="date of adoption"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/item_detail_image"
+            app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
+            app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle" />
+
+        <TextView
+            android:id="@+id/item_detail_adoption_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:fontFamily="@font/sofiasans_regular"
+            android:hint="date"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/item_detail_image"
+            app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
+            app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle" />
+
+        <ImageButton
+            android:id="@+id/starButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/fragment_item_favorate_star"
+            android:scaleType="fitCenter"
+            android:src="@drawable/item_star_favorate"
+            app:layout_constraintEnd_toEndOf="@+id/item_detail_mainlayout"
+            app:layout_constraintBottom_toTopOf="@+id/item_detail_mainlayout"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/item_detail_mainlayout"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/item_detail_mainlayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/item_detail_background_rect">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="120dp" />
+
+            <TextView
+                android:id="@+id/item_detail_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="Plant name"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/goldman_regular"/>
+
+            <TextView
+                android:id="@+id/item_detail_realname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="plant realname"
+                android:textSize="14sp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/sofiasans_regular"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/item_detail_watering_cycle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/paragraph_margin"
+                        android:background="@drawable/fragment_item_circle"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="cycle"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/item_detail_last_water"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/paragraph_margin"
+                        android:background="@drawable/fragment_item_circle"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="last water"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/item_detail_Light"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/paragraph_margin"
+                        android:background="@drawable/fragment_item_circle"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:text="Light"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#3E3A39" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/paragraph_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/fragment_item_round_background"
+                        android:gravity="center_horizontal"
+                        android:layout_marginEnd="10dp"
+                        android:padding="5dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UP TO..."
+                            android:textSize="16sp"
+                            android:layout_margin="@dimen/text_margin"
+                            android:fontFamily="@font/goldman_regular" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:hint="물주기 : D-00"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:hint="분갈이 : D-00"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="@dimen/text_margin"
+                            android:hint="영양제 : D-00"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/fragment_item_round_background"
+                        android:gravity="center_horizontal"
+                        android:layout_marginStart="10dp"
+                        android:padding="5dp"
+                        android:layout_weight="3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="@dimen/text_margin"
+                            android:hint="영양제 : D-00"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Condition is..."
+                    android:textSize="18sp"
+                    android:fontFamily="@font/goldman_regular"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_detail_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/fragment_item_circle"
+            app:layout_constraintBottom_toBottomOf="@+id/item_detail_background_circle"
+            app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
+            app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle"
+            app:layout_constraintTop_toTopOf="@+id/item_detail_background_circle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

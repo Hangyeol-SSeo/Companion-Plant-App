@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- When the star is selected (pressed) -->
+    <item android:drawable="@color/yellow" android:state_selected="true"/>
+    <!-- Default state (not pressed) -->
+    <item android:drawable="@color/white"/>
+</selector>
