@@ -9,5 +9,7 @@
         android:id="@+id/itemFragment"
         android:name="com.eywa.myplant.tab.ItemFragment"
         android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
+        tools:layout="@layout/fragment_item_list" >
+    </fragment>
+
 </navigation>

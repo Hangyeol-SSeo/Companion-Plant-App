@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.eywa.myplant"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -35,10 +35,18 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.recyclerview:recyclerview:1.3.1'
     implementation 'androidx.fragment:fragment:1.6.1'
-    implementation 'androidx.navigation:navigation-fragment:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment:2.4.0'
+    implementation 'androidx.navigation:navigation-ui:2.4.0'
+
+    implementation 'com.kizitonwose.calendar:compose:2.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.20"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20"
 
+    implementation 'androidx.compose.ui:ui:1.3.3'
+    implementation 'androidx.compose.material:material:1.3.1'
+    implementation 'androidx.compose.ui:ui-tooling:1.3.3'
 }

@@ -18,7 +18,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/sofiasans_regular"
         android:text="FOR PARTNER,"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/sofiasans_regular"
         android:text="WITH PLANTNER."
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -55,17 +55,17 @@
         android:fontFamily="@font/sofiasans_regular"
         android:text="@string/action_sign_in"
         android:textColor="#3E3A39"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.38" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="234dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -73,12 +73,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circle_color_logo"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.155" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="234dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"

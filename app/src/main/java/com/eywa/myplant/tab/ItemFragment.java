@@ -15,8 +15,22 @@ import android.view.ViewGroup;
 import com.eywa.myplant.R;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
 
-/**
- * A fragment representing a list of Items.
+/*
+HttpCallback httpCallback = new HttpCallback() {
+    @Override
+    public void onSuccess(String idValue) {
+        // idValue를 여기서 사용하실 수 있습니다.
+    }
+
+    @Override
+    public void onFailure(String errorMessage) {
+        // 에러 메시지를 여기서 사용하실 수 있습니다.
+    }
+};
+
+String url = "http://localhost:3000/newuser?username=hangyeol";
+Executor executor = Executors.newSingleThreadExecutor();
+executor.execute(new HttpPostRequest(url, httpCallback));
  */
 public class ItemFragment extends Fragment {
 

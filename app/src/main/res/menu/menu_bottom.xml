@@ -3,18 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Plant list"
-        android:id="@+id/userTab"
+        android:id="@+id/listTab"
         android:enabled="true"
-        app:showAsAction="always" />
-
-    <item android:title="Calendar"
-        android:id="@+id/calTab"
         android:checked="true"
-        android:enabled="true"
         app:showAsAction="always" />
 
-    <item android:title="Today's daily"
-        android:id="@+id/statTab"
+<!--    <item android:title="Calendar"-->
+<!--        android:id="@+id/calTab"-->
+<!--        android:enabled="true"-->
+<!--        app:showAsAction="always" />-->
+
+    <item android:title="Archive"
+        android:id="@+id/archiveTab"
+        app:showAsAction="always"
+        android:enabled="true" />
+
+    <item android:title="Mission"
+        android:id="@+id/missionTab"
         app:showAsAction="always"
         android:enabled="true" />
 </menu>
