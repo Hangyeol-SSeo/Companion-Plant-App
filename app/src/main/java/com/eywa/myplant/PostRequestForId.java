@@ -1,10 +1,7 @@
 package com.eywa.myplant;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.cert.X509Certificate;
@@ -18,14 +15,14 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class HttpPostRequest implements Runnable {
+public class PostRequestForId implements Runnable {
 
     private String requestURL;
     private Handler handler = new Handler(Looper.getMainLooper());
     private HttpCallback callback;
 
 
-    public HttpPostRequest(String requestURL, HttpCallback callback) {
+    public PostRequestForId(String requestURL, HttpCallback callback) {
         this.requestURL = requestURL;
         this.callback = callback;
     }

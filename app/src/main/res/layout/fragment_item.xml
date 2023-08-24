@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:background="#FFFFFFFF"
     android:padding="10dp">
 
     <ImageView
@@ -34,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/text_margin"
+            android:gravity="end"
             android:textSize="16sp"
             android:hint="User setting name"
             android:maxLines="1"
@@ -45,7 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/paragraph_margin"
-            android:textSize="12sp"
+            android:gravity="end"
+            android:textSize="14sp"
             android:fontFamily="@font/sofiasans_regular"
             android:hint="Plant real name"
             android:maxLines="1"

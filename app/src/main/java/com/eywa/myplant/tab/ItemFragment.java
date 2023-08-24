@@ -1,6 +1,7 @@
 package com.eywa.myplant.tab;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.eywa.myplant.DialogAddPlant;
 import com.eywa.myplant.R;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
+import com.eywa.myplant.data.model.LoggedInUser;
+
+import java.util.UUID;
 
 /*
 HttpCallback httpCallback = new HttpCallback() {
@@ -28,9 +34,9 @@ HttpCallback httpCallback = new HttpCallback() {
     }
 };
 
-String url = "http://localhost:3000/newuser?username=hangyeol";
+String url = "http://localhost:3000/newuser?username="+$;
 Executor executor = Executors.newSingleThreadExecutor();
-executor.execute(new HttpPostRequest(url, httpCallback));
+executor.execute(new PostRequestForId(url, httpCallback));
  */
 public class ItemFragment extends Fragment {
 
@@ -70,17 +76,35 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        // Find the RecyclerView directly using findViewById
+        RecyclerView recyclerView = view.findViewById(R.id.item_recycler_list);
+        Context context = view.getContext();
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
+        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+
+        // + 버튼 클릭시 Dialog 띄우기
+        Button addButton = view.findViewById(R.id.item_recycler_add);
+        addButton.setOnClickListener(v -> {
+            DialogAddPlant dialog = new DialogAddPlant((nickname, realname) -> {
+                String id = UUID.randomUUID().toString(); // generate unique ID
+                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, fetchDisplayNameFromPreferences(), nickname, realname);
+                PlaceholderContent.addItem(newItem);
+                recyclerView.getAdapter().notifyDataSetChanged();
+            });
+            dialog.show(getChildFragmentManager(), "addPlantDialog");
+        });
+
         return view;
     }
+
+    private String fetchDisplayNameFromPreferences() {
+        Context context = getActivity();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("userName", ""); // Default value is an empty string
+    }
+
 }

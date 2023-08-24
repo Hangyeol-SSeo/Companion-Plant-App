@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,16 +24,32 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eywa.myplant.HttpCallback;
 import com.eywa.myplant.MainActivity;
-import com.eywa.myplant.R;
-import com.eywa.myplant.ui.login.LoginViewModel;
-import com.eywa.myplant.ui.login.LoginViewModelFactory;
+import com.eywa.myplant.PostRequestForId;
 import com.eywa.myplant.databinding.ActivityLoginBinding;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+
+    HttpCallback httpCallback = new HttpCallback() {
+        @Override
+        public void onSuccess(String idValue) {
+            // userId값은 한번 저장 이후 못쓰는 값
+            saveToPreferences("userId", idValue); // USERNAME is unique -> idValue too unique
+            // TODO: id값에 따라서 데이터베이스에 user를 저장해야 함. 추후에 recyclerView 데이터도 저장해야 함
+        }
+
+        @Override
+        public void onFailure(String errorMessage) {
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,14 +144,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        // Shared Preferences에 값 저장
+        String displayName = model.getDisplayName();
+        saveToPreferences("userName", displayName); // login된 id에 따라 계속 덮어씌워짐
+
+        //String welcome = getString(R.string.welcome) + model.getDisplayName();
+        //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
+        String url = "http://localhost:3000/newuser?username="+model.getDisplayName();
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new PostRequestForId(url, httpCallback));
+
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveToPreferences(String key, String displayName) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, displayName);
+        editor.apply();
     }
 }
