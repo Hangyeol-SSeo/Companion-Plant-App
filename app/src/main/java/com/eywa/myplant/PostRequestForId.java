@@ -7,6 +7,7 @@ import java.net.URL;
 import java.security.cert.X509Certificate;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class PostRequestForId implements Runnable {
+    private static final String log = "postRequestForId";
 
     private String requestURL;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -46,11 +48,13 @@ public class PostRequestForId implements Runnable {
         };
 
         try {
+            Log.d(log, "1");
             SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, trustAllCertificates, new java.security.SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            Log.d(log, "2");
 
-            url = new URL(requestURL);
+            url = new URL("http://10.0.2.2:3000" + requestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
@@ -58,8 +62,11 @@ public class PostRequestForId implements Runnable {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
+            Log.d(log, "3");
+
             int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
+                Log.d(log, "4");
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String line;
                 StringBuilder responseBuilder = new StringBuilder();
@@ -71,12 +78,14 @@ public class PostRequestForId implements Runnable {
 
                 // JSON 응답에서 "id" 값을 추출
                 JSONObject jsonObject = new JSONObject(response);
+                String message = jsonObject.getString("message");
                 String idValue = jsonObject.getString("id");
 
                 if (callback != null) {
-                    handler.post(() -> callback.onSuccess(idValue));
+                    handler.post(() -> callback.onSuccess(message, idValue));
                 }
             } else {
+                Log.d(log, "5");
                 // 오류 메시지 읽기
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 String line;
@@ -92,6 +101,7 @@ public class PostRequestForId implements Runnable {
                 }
             }
         } catch (Exception e) {
+            Log.e(log, "exception: " ,e);
             e.printStackTrace();
         }
     }

@@ -9,17 +9,23 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.eywa.myplant.DialogAddPlant;
+import com.eywa.myplant.HttpCallback;
+import com.eywa.myplant.PostRequestForId;
 import com.eywa.myplant.R;
+import com.eywa.myplant.data.DatabaseHelper;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
-import com.eywa.myplant.data.model.LoggedInUser;
 
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /*
 HttpCallback httpCallback = new HttpCallback() {
@@ -39,6 +45,19 @@ Executor executor = Executors.newSingleThreadExecutor();
 executor.execute(new PostRequestForId(url, httpCallback));
  */
 public class ItemFragment extends Fragment {
+
+    HttpCallback httpCallback = new HttpCallback() {
+        @Override
+        public void onSuccess(String message, String idValue) {
+            Log.d("postResponse", message + " " + idValue);
+            // sharedPreferences를 사용하면 값이 계속 덮어씌워지는 문제 발생
+        }
+
+        @Override
+        public void onFailure(String errorMessage) {
+            Log.e("postResponse", errorMessage);
+        }
+    };
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -91,20 +110,42 @@ public class ItemFragment extends Fragment {
         addButton.setOnClickListener(v -> {
             DialogAddPlant dialog = new DialogAddPlant((nickname, realname) -> {
                 String id = UUID.randomUUID().toString(); // generate unique ID
-                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, fetchDisplayNameFromPreferences(), nickname, realname);
+                String userId = fetchFromPreferences("userId");
+
+                // Sending UUID to the server
+                String url = "/newplant?plantId"+id + "&plantname="+nickname + "&userId"+userId;
+                Executor executor = Executors.newSingleThreadExecutor();
+                executor.execute(new PostRequestForId(url, httpCallback));
+
+                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname);
+
+                // Save data to local SQLite database
+                DatabaseHelper dbHelper = new DatabaseHelper(getContext()); // Assuming you have a DatabaseHelper class for SQLite operations
+                dbHelper.addPlant(newItem);
+
                 PlaceholderContent.addItem(newItem);
                 recyclerView.getAdapter().notifyDataSetChanged();
             });
             dialog.show(getChildFragmentManager(), "addPlantDialog");
         });
 
+
         return view;
     }
 
-    private String fetchDisplayNameFromPreferences() {
+//    private void saveToPreferences(String key, String value) {
+//        Context context = getActivity();
+//        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(key, value);
+//        editor.apply();
+//    }
+
+    private String fetchFromPreferences(String key) {
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("userName", ""); // Default value is an empty string
+        return sharedPreferences.getString(key, ""); // Default value is an empty string
     }
+
 
 }

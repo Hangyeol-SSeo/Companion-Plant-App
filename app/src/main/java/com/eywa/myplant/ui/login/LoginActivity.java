@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -39,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
     HttpCallback httpCallback = new HttpCallback() {
         @Override
-        public void onSuccess(String idValue) {
-            // userId값은 한번 저장 이후 못쓰는 값
+        public void onSuccess(String message, String idValue) {
+            Log.d("postResponse", message);
             saveToPreferences("userId", idValue); // USERNAME is unique -> idValue too unique
             // TODO: id값에 따라서 데이터베이스에 user를 저장해야 함. 추후에 recyclerView 데이터도 저장해야 함
         }
@@ -151,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
         //String welcome = getString(R.string.welcome) + model.getDisplayName();
         //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
 
-        String url = "http://localhost:3000/newuser?username="+model.getDisplayName();
+        String url = "/newuser?username="+model.getDisplayName();
         Executor executor = Executors.newSingleThreadExecutor();
         executor.execute(new PostRequestForId(url, httpCallback));
 
@@ -163,10 +164,10 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    private void saveToPreferences(String key, String displayName) {
+    private void saveToPreferences(String key, String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, displayName);
+        editor.putString(key, value);
         editor.apply();
     }
 }
