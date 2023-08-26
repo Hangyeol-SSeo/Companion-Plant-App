@@ -1,5 +1,7 @@
 package com.eywa.myplant.tab.placeholder;
 
+import android.net.Uri;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,15 +19,27 @@ public class PlaceholderContent {
 
     public static class PlaceholderItem {
         public final String id;
-        public final String user;
-        public final String nickname;
-        public final String realname;
+        public final String userId;
+        public String nickname;
+        public String realname;
+        public Uri plantImageUri;
+        public float light_intensity; // 햇빛
+        public float soil_moisture; // 토양수분
+        public float temperature; // 온도
+        public float humidity; // 습도
+        public boolean status;
 
-        public PlaceholderItem(String id, String user, String nickname, String realname) {
+        public PlaceholderItem(String id, String user, String nickname, String realname, Uri plantImageUri) {
             this.id = id;
-            this.user = user;
+            this.userId = user;
             this.nickname = nickname;
             this.realname = realname;
+            this.plantImageUri = plantImageUri;
+            this.light_intensity = 0;
+            this.soil_moisture = 0;
+            this.temperature = 0;
+            this.humidity = 0;
+            this.status = false;
         }
     }
 }

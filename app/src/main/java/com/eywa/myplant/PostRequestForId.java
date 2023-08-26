@@ -48,11 +48,11 @@ public class PostRequestForId implements Runnable {
         };
 
         try {
-            Log.d(log, "1");
+            //Log.d(log, "1");
             SSLContext sc = SSLContext.getInstance("SSL");
             sc.init(null, trustAllCertificates, new java.security.SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-            Log.d(log, "2");
+            //Log.d(log, "2");
 
             url = new URL("http://10.0.2.2:3000" + requestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -62,11 +62,11 @@ public class PostRequestForId implements Runnable {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            Log.d(log, "3");
+            //Log.d(log, "3");
 
             int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                Log.d(log, "4");
+                //Log.d(log, "4");
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String line;
                 StringBuilder responseBuilder = new StringBuilder();
@@ -85,7 +85,7 @@ public class PostRequestForId implements Runnable {
                     handler.post(() -> callback.onSuccess(message, idValue));
                 }
             } else {
-                Log.d(log, "5");
+                //Log.d(log, "5");
                 // 오류 메시지 읽기
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
                 String line;

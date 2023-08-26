@@ -29,19 +29,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         return new ViewHolder(FragmentItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
+        holder.plantImage.setImageURI(holder.mItem.plantImageUri);
         holder.nicknameTextView.setText(holder.mItem.nickname);
         holder.realnameTextView.setText(holder.mItem.realname);
 
-        //holder.moistureBar.setProgress(51);
-        //holder.sunlightBar.setProgress(51);
+        holder.moistureBar.setProgress((int)holder.mItem.soil_moisture);
+        holder.sunlightBar.setProgress((int)holder.mItem.light_intensity);
 
         if (holder.moistureBar.getProgress() < 50 || holder.sunlightBar.getProgress() < 50) {
             holder.conditionFlag.setImageResource(R.drawable.fragment_item_statement_red);
@@ -51,6 +50,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public final ImageView plantImage;
         public final TextView nicknameTextView;
         public final TextView realnameTextView;
         public PlaceholderItem mItem;
@@ -60,6 +60,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
+            plantImage = binding.listPlantImage;
             nicknameTextView = binding.listPlantNickname;
             realnameTextView = binding.listPlantRealname;
             moistureBar = binding.listMoistureBar;

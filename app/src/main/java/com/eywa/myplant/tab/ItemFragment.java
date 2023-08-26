@@ -108,7 +108,7 @@ public class ItemFragment extends Fragment {
         // + 버튼 클릭시 Dialog 띄우기
         Button addButton = view.findViewById(R.id.item_recycler_add);
         addButton.setOnClickListener(v -> {
-            DialogAddPlant dialog = new DialogAddPlant((nickname, realname) -> {
+            DialogAddPlant dialog = new DialogAddPlant((nickname, realname, plantImageUri) -> {
                 String id = UUID.randomUUID().toString(); // generate unique ID
                 String userId = fetchFromPreferences("userId");
 
@@ -117,7 +117,7 @@ public class ItemFragment extends Fragment {
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(new PostRequestForId(url, httpCallback));
 
-                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname);
+                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname, plantImageUri);
 
                 // Save data to local SQLite database
                 DatabaseHelper dbHelper = new DatabaseHelper(getContext()); // Assuming you have a DatabaseHelper class for SQLite operations
@@ -127,6 +127,12 @@ public class ItemFragment extends Fragment {
                 recyclerView.getAdapter().notifyDataSetChanged();
             });
             dialog.show(getChildFragmentManager(), "addPlantDialog");
+        });
+
+        // - 버튼 클릭시 원하는 식물 삭제
+        Button delButton = view.findViewById(R.id.item_recycler_del);
+        delButton.setOnClickListener(v -> {
+
         });
 
 
