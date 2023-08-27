@@ -23,6 +23,7 @@ import com.eywa.myplant.R;
 import com.eywa.myplant.data.DatabaseHelper;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -103,7 +104,8 @@ public class ItemFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS));
+        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS);
+        recyclerView.setAdapter(adapter);
 
         // + 버튼 클릭시 Dialog 띄우기
         Button addButton = view.findViewById(R.id.item_recycler_add);
@@ -132,7 +134,27 @@ public class ItemFragment extends Fragment {
         // - 버튼 클릭시 원하는 식물 삭제
         Button delButton = view.findViewById(R.id.item_recycler_del);
         delButton.setOnClickListener(v -> {
+            if (adapter.isSelectionMode()) {
+                // Delete selected items
+                List<PlaceholderContent.PlaceholderItem> selectedItems = adapter.getSelectedItems();
+                for (PlaceholderContent.PlaceholderItem item : selectedItems) {
+                    // Delete item from server
+                    // ...
 
+                    // Delete item from local database
+                    DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+                    dbHelper.deletePlant(item);
+
+                    // Delete item from RecyclerView
+                    PlaceholderContent.removeItem(item);
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+                adapter.setSelectionMode(false);
+                delButton.setText("-");
+            } else {
+                adapter.setSelectionMode(true);
+                delButton.setText("Confirm");
+            }
         });
 
         return view;

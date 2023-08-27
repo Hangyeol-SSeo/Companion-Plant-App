@@ -2,6 +2,7 @@ package com.eywa.myplant.tab;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import com.eywa.myplant.R;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent.PlaceholderItem;
 import com.eywa.myplant.databinding.FragmentItemBinding;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
@@ -22,6 +26,8 @@ import java.util.List;
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<PlaceholderItem> mValues;
+    private boolean selectionMode = false;
+    private final Set<PlaceholderItem> selectedItems = new HashSet<>();
 
     public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
         mValues = items;
@@ -47,6 +53,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         } else {
             holder.conditionFlag.setImageResource(R.drawable.fragment_item_statement_green);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            if (selectionMode) {
+                toggleSelection(holder.mItem);
+                holder.itemView.setBackgroundColor(selectedItems.contains(holder.mItem) ? Color.GRAY : Color.WHITE);
+            }
+        });
+        holder.itemView.setBackgroundColor(selectedItems.contains(holder.mItem) ? Color.GRAY : Color.WHITE);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +81,29 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             sunlightBar = binding.listSunlightBar;
             conditionFlag = binding.listConditionFlag;
         }
+    }
+
+    public void setSelectionMode(boolean enabled) {
+        this.selectionMode = enabled;
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public boolean isSelectionMode() {
+        return selectionMode;
+    }
+
+    public List<PlaceholderItem> getSelectedItems() {
+        return new ArrayList<>(selectedItems);
+    }
+
+    private void toggleSelection(PlaceholderItem item) {
+        if (selectedItems.contains(item)) {
+            selectedItems.remove(item);
+        } else {
+            selectedItems.add(item);
+        }
+        notifyDataSetChanged();
     }
 
     @Override

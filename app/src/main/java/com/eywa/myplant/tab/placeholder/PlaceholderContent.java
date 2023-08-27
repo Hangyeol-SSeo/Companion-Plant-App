@@ -17,6 +17,11 @@ public class PlaceholderContent {
         ITEM_MAP.put(item.id, item);
     }
 
+    public static void removeItem(PlaceholderItem item) {
+        ITEMS.remove(item);
+        ITEM_MAP.remove(item.id);
+    }
+
     public static class PlaceholderItem {
         public final String id;
         public final String userId;
@@ -28,6 +33,7 @@ public class PlaceholderContent {
         public float temperature; // 온도
         public float humidity; // 습도
         public boolean status;
+        public float intimacy; // 친밀도(호감도)
 
         public PlaceholderItem(String id, String user, String nickname, String realname, Uri plantImageUri) {
             this.id = id;
@@ -40,6 +46,7 @@ public class PlaceholderContent {
             this.temperature = 0;
             this.humidity = 0;
             this.status = false;
+            this.intimacy = 0;
         }
     }
 }

@@ -11,5 +11,15 @@
         android:label="fragment_item_list"
         tools:layout="@layout/fragment_item_list" >
     </fragment>
+    <fragment
+        android:id="@+id/archiveFragment"
+        android:name="com.eywa.myplant.tab.ArchiveFragment"
+        android:label="fragment_dictionary"
+        tools:layout="@layout/fragment_archive" />
+    <fragment
+        android:id="@+id/missionFragment"
+        android:name="com.eywa.myplant.tab.MissionFragment"
+        android:label="fragment_mission"
+        tools:layout="@layout/fragment_mission" />
 
 </navigation>

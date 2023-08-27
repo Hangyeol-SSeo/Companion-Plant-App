@@ -68,6 +68,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Add more methods to update, delete, retrieve as needed...
+    public void deletePlant(PlaceholderContent.PlaceholderItem item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{item.id});
+        db.close();
+    }
+
 }
 

@@ -61,20 +61,6 @@
             app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
             app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle" />
 
-        <ImageButton
-            android:id="@+id/starButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:background="@drawable/fragment_item_favorate_star"
-            android:scaleType="fitCenter"
-            android:src="@drawable/item_star_favorate"
-            app:layout_constraintEnd_toEndOf="@+id/item_detail_mainlayout"
-            app:layout_constraintBottom_toTopOf="@+id/item_detail_mainlayout"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/item_detail_mainlayout"
-            android:layout_marginBottom="10dp"/>
-
         <LinearLayout
             android:id="@+id/item_detail_mainlayout"
             android:layout_width="0dp"
