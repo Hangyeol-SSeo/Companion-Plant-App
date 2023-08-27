@@ -32,21 +32,20 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/mypage"
+                android:id="@+id/toolbar_qr_button"
                 android:layout_width="18dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="27dp"
                 android:clickable="true"
-                android:src="@drawable/action_mypage" />
-
+                android:src="@drawable/action_hamburger_menu" />
 
             <ImageButton
-                android:id="@+id/hamburger_menu"
+                android:id="@+id/toolbar_mypage_button"
                 android:layout_width="27dp"
                 android:layout_height="23dp"
                 android:layout_margin="27dp"
                 android:clickable="true"
-                android:src="@drawable/action_hamburger_menu" />
+                android:src="@drawable/action_mypage" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

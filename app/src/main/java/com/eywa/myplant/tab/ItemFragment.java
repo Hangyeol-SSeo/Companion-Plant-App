@@ -135,17 +135,8 @@ public class ItemFragment extends Fragment {
 
         });
 
-
         return view;
     }
-
-//    private void saveToPreferences(String key, String value) {
-//        Context context = getActivity();
-//        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(key, value);
-//        editor.apply();
-//    }
 
     private String fetchFromPreferences(String key) {
         Context context = getActivity();
