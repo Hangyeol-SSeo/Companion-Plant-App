@@ -115,7 +115,7 @@ public class ItemFragment extends Fragment {
                 String userId = fetchFromPreferences("userId");
 
                 // Sending UUID to the server
-                String url = "/newplant?plantId"+id + "&plantname="+nickname + "&userId"+userId;
+                String url = "/newplant?plantId="+id + "&plantname="+nickname + "&userId="+userId;
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(new PostRequestForId(url, httpCallback));
 
@@ -139,7 +139,9 @@ public class ItemFragment extends Fragment {
                 List<PlaceholderContent.PlaceholderItem> selectedItems = adapter.getSelectedItems();
                 for (PlaceholderContent.PlaceholderItem item : selectedItems) {
                     // Delete item from server
-                    // ...
+                    String url = "/rmplant?plantId="+item.id;
+                    Executor executor = Executors.newSingleThreadExecutor();
+                    executor.execute(new PostRequestForId(url, httpCallback));
 
                     // Delete item from local database
                     DatabaseHelper dbHelper = new DatabaseHelper(getContext());
