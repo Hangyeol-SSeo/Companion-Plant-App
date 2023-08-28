@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TEMPERATURE = "temperature";
     private static final String COLUMN_HUMIDITY = "humidity";
     private static final String COLUMN_STATUS = "status";
+    private static final String COLUMN_INTIMACY = "intimacy";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,7 +41,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_SOIL_MOISTURE + " REAL, " +
                 COLUMN_TEMPERATURE + " REAL, " +
                 COLUMN_HUMIDITY + " REAL, " +
-                COLUMN_STATUS + " INTEGER)";
+                COLUMN_STATUS + " INTEGER, " +
+                COLUMN_INTIMACY + " REAL)";
+
         db.execSQL(createTable);
     }
 
@@ -63,6 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TEMPERATURE, item.temperature);
         values.put(COLUMN_HUMIDITY, item.humidity);
         values.put(COLUMN_STATUS, item.status ? 1 : 0);
+        values.put(COLUMN_INTIMACY, item.intimacy);
 
         db.insert(TABLE_NAME, null, values);
         db.close();
