@@ -7,24 +7,28 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="end">
 
         <Button
             android:id="@+id/item_recycler_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/paragraph_margin"
-            android:text="+" />
+            android:textSize="12sp"
+            android:fontFamily="@font/sofiasans_regular"
+            android:text="추가" />
 
         <Button
             android:id="@+id/item_recycler_del"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_margin="@dimen/paragraph_margin"
-            android:text="-" />
-
+            android:textSize="12sp"
+            android:fontFamily="@font/sofiasans_regular"
+            android:text="삭제" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

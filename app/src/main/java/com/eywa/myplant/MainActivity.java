@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import com.eywa.myplant.tab.ArchiveFragment;
 import com.eywa.myplant.tab.ItemFragment;
 import com.eywa.myplant.tab.MissionFragment;
+import com.eywa.myplant.tab.OnBackPressedListener;
 import com.eywa.myplant.toolbar.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,7 +43,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,4 +105,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+    private OnBackPressedListener onBackPressedListener;
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (onBackPressedListener != null) {
+            onBackPressedListener.onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

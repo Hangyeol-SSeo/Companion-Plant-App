@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eywa.myplant.R;
+import com.eywa.myplant.tab.placeholder.PlaceholderContent;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent.PlaceholderItem;
 import com.eywa.myplant.databinding.FragmentItemBinding;
 
@@ -29,8 +30,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private boolean selectionMode = false;
     private final Set<PlaceholderItem> selectedItems = new HashSet<>();
 
-    public MyItemRecyclerViewAdapter(List<PlaceholderItem> items) {
-        mValues = items;
+    public MyItemRecyclerViewAdapter(List<PlaceholderContent.PlaceholderItem> items) {
+        mValues = new ArrayList<>(items);
+    }
+
+    public void addItem(PlaceholderContent.PlaceholderItem item) {
+        mValues.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(PlaceholderContent.PlaceholderItem item) {
+        mValues.remove(item);
+        notifyDataSetChanged();
     }
 
     @Override

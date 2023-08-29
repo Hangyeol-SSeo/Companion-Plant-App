@@ -5,8 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Plants.db";
@@ -77,6 +81,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, COLUMN_ID + " = ?", new String[]{item.id});
         db.close();
     }
+
+    public List<PlaceholderContent.PlaceholderItem> getAllPlantsByUserId(String userId) {
+        List<PlaceholderContent.PlaceholderItem> items = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_USER_ID + " = ?", new String[]{userId}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String id = cursor.getString(cursor.getColumnIndex(COLUMN_ID));
+                String nickname = cursor.getString(cursor.getColumnIndex(COLUMN_NICKNAME));
+                String realname = cursor.getString(cursor.getColumnIndex(COLUMN_REALNAME));
+                Uri plantImageUri = Uri.parse(cursor.getString(cursor.getColumnIndex(COLUMN_IMG)));
+                float light_intensity = cursor.getFloat(cursor.getColumnIndex(COLUMN_LIGHT_INTENSITY));
+                float soil_moisture = cursor.getFloat(cursor.getColumnIndex(COLUMN_SOIL_MOISTURE));
+                float temperature = cursor.getFloat(cursor.getColumnIndex(COLUMN_TEMPERATURE));
+                float humidity = cursor.getFloat(cursor.getColumnIndex(COLUMN_HUMIDITY));
+                boolean status = cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)) == 1;
+
+                PlaceholderContent.PlaceholderItem item = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname, plantImageUri);
+                item.light_intensity = light_intensity;
+                item.soil_moisture = soil_moisture;
+                item.temperature = temperature;
+                item.humidity = humidity;
+                item.status = status;
+
+                items.add(item);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return items;
+    }
+
 
 }
 

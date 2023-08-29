@@ -104,7 +104,11 @@ public class ItemFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS);
+        String userId = fetchFromPreferences("userId");
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        List<PlaceholderContent.PlaceholderItem> items = dbHelper.getAllPlantsByUserId(userId);
+
+        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items);
         recyclerView.setAdapter(adapter);
 
         // + 버튼 클릭시 Dialog 띄우기
@@ -112,7 +116,6 @@ public class ItemFragment extends Fragment {
         addButton.setOnClickListener(v -> {
             DialogAddPlant dialog = new DialogAddPlant((nickname, realname, plantImageUri) -> {
                 String id = UUID.randomUUID().toString(); // generate unique ID
-                String userId = fetchFromPreferences("userId");
 
                 // Sending UUID to the server
                 String url = "/newplant?plantId="+id + "&plantname="+nickname + "&userId="+userId;
@@ -122,8 +125,8 @@ public class ItemFragment extends Fragment {
                 PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname, plantImageUri);
 
                 // Save data to local SQLite database
-                DatabaseHelper dbHelper = new DatabaseHelper(getContext()); // Assuming you have a DatabaseHelper class for SQLite operations
                 dbHelper.addPlant(newItem);
+                adapter.addItem(newItem);
 
                 PlaceholderContent.addItem(newItem);
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -144,18 +147,18 @@ public class ItemFragment extends Fragment {
                     executor.execute(new PostRequestForId(url, httpCallback));
 
                     // Delete item from local database
-                    DatabaseHelper dbHelper = new DatabaseHelper(getContext());
                     dbHelper.deletePlant(item);
 
                     // Delete item from RecyclerView
                     PlaceholderContent.removeItem(item);
+                    adapter.removeItem(item);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
                 adapter.setSelectionMode(false);
-                delButton.setText("-");
+                delButton.setText("삭제");
             } else {
                 adapter.setSelectionMode(true);
-                delButton.setText("Confirm");
+                delButton.setText("확인");
             }
         });
 
@@ -167,6 +170,4 @@ public class ItemFragment extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, ""); // Default value is an empty string
     }
-
-
 }
