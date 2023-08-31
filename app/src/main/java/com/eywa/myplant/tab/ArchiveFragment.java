@@ -20,7 +20,7 @@ import com.eywa.myplant.R;
 
 public class ArchiveFragment extends Fragment implements OnBackPressedListener {
     private WebView myWebView;
-    private Button button;
+    private ConstraintLayout item;
     private ConstraintLayout constraintLayout;
 
     @Override
@@ -30,7 +30,7 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
         View view = inflater.inflate(R.layout.fragment_archive, container, false);
 
         myWebView = (WebView) view.findViewById(R.id.archive_webview);
-        button = view.findViewById(R.id.button1);
+        item = view.findViewById(R.id.archive_item_temp);
         constraintLayout = view.findViewById(R.id.archive_container);
 
         WebSettings webSettings = myWebView.getSettings();
@@ -39,7 +39,7 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
         myWebView.setWebViewClient(new WebViewClient());
         myWebView.loadUrl("https://nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00376&cntntsNo=12976&totalSearchYn=Y");
 
-        button.setOnClickListener(new View.OnClickListener() {
+        item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myWebView.setVisibility(View.VISIBLE);

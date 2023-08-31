@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="가나다순"
                 android:textSize="14sp"
                 android:fontFamily="@font/goldman_regular"
@@ -51,18 +51,90 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="160dp">
+        <TextView
+            android:id="@+id/archive_index_temp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/fragment_item_circle_background"
+            android:fontFamily="@font/sofiasans_regular"
+            android:text="ㅅ"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.055"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/button1"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/archive_item_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/archive_index_temp" >
+
+            <ImageView
+                android:id="@+id/archive_image_temp"
+                android:layout_width="115dp"
+                android:layout_height="71dp"
+                android:src="@drawable/epipremnum_aureum"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.122"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/goldman_regular"
+                android:text="스킨답서스"
+                android:textStyle="bold"
+                android:textColor="#FF95A693"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/archive_image_temp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_marginLeft="80dp"
+                android:fontFamily="@font/goldman_regular"
+                android:text="천남성과"
+                android:textStyle="bold"
+                android:textColor="#FF3E3A39"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/archive_image_temp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="20dp"
+                android:text="학명: Epipremnum aureum 'Lime'"
+                android:textSize="11sp"
+                android:textColor="#FF3E3A39"
+                android:fontFamily="@font/sofiasans_regular"
+                app:layout_constraintStart_toEndOf="@+id/archive_image_temp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="270dp"
+        android:background="?android:attr/listDivider" />
 
 </FrameLayout>
