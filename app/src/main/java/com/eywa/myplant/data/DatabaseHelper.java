@@ -115,6 +115,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    public PlaceholderContent.PlaceholderItem getPlantById(String plantId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null, COLUMN_ID + " = ?", new String[]{plantId}, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        String userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID));
+        String nickname = cursor.getString(cursor.getColumnIndex(COLUMN_NICKNAME));
+        String realname = cursor.getString(cursor.getColumnIndex(COLUMN_REALNAME));
+        Uri plantImageUri = Uri.parse(cursor.getString(cursor.getColumnIndex(COLUMN_IMG)));
+        float light_intensity = cursor.getFloat(cursor.getColumnIndex(COLUMN_LIGHT_INTENSITY));
+        float soil_moisture = cursor.getFloat(cursor.getColumnIndex(COLUMN_SOIL_MOISTURE));
+        float temperature = cursor.getFloat(cursor.getColumnIndex(COLUMN_TEMPERATURE));
+        float humidity = cursor.getFloat(cursor.getColumnIndex(COLUMN_HUMIDITY));
+        boolean status = cursor.getInt(cursor.getColumnIndex(COLUMN_STATUS)) == 1;
+
+        cursor.close();
+        db.close();
+
+        PlaceholderContent.PlaceholderItem plant = new PlaceholderContent.PlaceholderItem(plantId, userId, nickname, realname, plantImageUri);
+        plant.light_intensity = light_intensity;
+        plant.soil_moisture = soil_moisture;
+        plant.temperature = temperature;
+        plant.humidity = humidity;
+        plant.status = status;
+
+        return plant;
+    }
+
+
 
 }
 

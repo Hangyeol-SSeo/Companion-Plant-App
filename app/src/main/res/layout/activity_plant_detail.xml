@@ -43,19 +43,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="57dp"
             android:fontFamily="@font/sofiasans_regular"
-            android:text="date of adoption"
+            android:text="💜💛🖤❤️💙💚"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/item_detail_image"
             app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
             app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle" />
 
         <TextView
-            android:id="@+id/item_detail_adoption_date"
+            android:id="@+id/item_detail_intimacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="35dp"
             android:fontFamily="@font/sofiasans_regular"
-            android:hint="date"
+            android:text="- 0.0 -"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/item_detail_image"
             app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
@@ -77,7 +77,7 @@
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="120dp" />
+                android:layout_height="130dp" />
 
             <TextView
                 android:id="@+id/item_detail_nickname"
@@ -234,11 +234,11 @@
 
         </LinearLayout>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/item_detail_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/fragment_item_circle"
+            android:background="@drawable/fragment_item_circle"
             app:layout_constraintBottom_toBottomOf="@+id/item_detail_background_circle"
             app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
             app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle"
@@ -252,6 +252,17 @@
             android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/item_detail_mainlayout"
             app:layout_constraintEnd_toEndOf="@+id/item_detail_mainlayout"
+            app:layout_constraintTop_toTopOf="@+id/item_detail_image"
+            app:layout_constraintVertical_bias="0.8"/>
+
+        <ImageButton
+            android:id="@+id/toolbar_share_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/action_share"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/item_detail_mainlayout"
+            app:layout_constraintStart_toStartOf="@+id/item_detail_mainlayout"
             app:layout_constraintTop_toTopOf="@+id/item_detail_image"
             app:layout_constraintVertical_bias="0.8"/>
 

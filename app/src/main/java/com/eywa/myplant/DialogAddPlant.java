@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -65,11 +66,20 @@ public class DialogAddPlant extends DialogFragment {
         cropImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (plantImage.getImageUri() == null) {
+                    // 이미지가 선택되지 않았을 때
+                    Toast.makeText(getActivity(), "이미지를 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Bitmap cropped = plantImage.getCroppedImage();
                 plantImage.setImageBitmap(cropped);
 
-                // Delete the existing file
-                File croppedFile = new File(getActivity().getExternalFilesDir(null), "cropped.jpg");
+                // 고유한 파일명 생성
+                String fileName = "cropped_" + System.currentTimeMillis() + ".jpg";
+                File croppedFile = new File(getActivity().getExternalFilesDir(null), fileName);
+
+                // 기존 파일 삭제
                 if (croppedFile.exists()) {
                     croppedFile.delete();
                 }

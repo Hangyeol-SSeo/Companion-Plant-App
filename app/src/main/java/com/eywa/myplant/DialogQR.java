@@ -1,4 +1,4 @@
-package com.eywa.myplant.toolbar;
+package com.eywa.myplant;
 
 import android.net.Uri;
 

@@ -16,7 +16,6 @@ import com.eywa.myplant.tab.ArchiveFragment;
 import com.eywa.myplant.tab.ItemFragment;
 import com.eywa.myplant.tab.MissionFragment;
 import com.eywa.myplant.tab.OnBackPressedListener;
-import com.eywa.myplant.toolbar.DialogQR;
 import com.eywa.myplant.toolbar.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * 메인, 추천&도감, 미션, 캐시샵(미정) ok
  *
  * 만들어야 할 페이지
- * 메인 - 식물 나열된 페이지, 각 식물 세부정보 + 공유, qr
+ * 메인 - 식물 나열된 페이지, 각 식물 세부정보 + 공유, qr ok
  * 추천&도감 - ok
  * 미션 - ok
  *

@@ -2,6 +2,7 @@ package com.eywa.myplant.tab;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             if (selectionMode) {
                 toggleSelection(holder.mItem);
                 holder.itemView.setBackgroundColor(selectedItems.contains(holder.mItem) ? Color.GRAY : Color.WHITE);
+            } else {
+                Intent intent = new Intent(v.getContext(), PlantDetail.class);
+                intent.putExtra("plantId", holder.mItem.id);
+                v.getContext().startActivity(intent);
             }
         });
         holder.itemView.setBackgroundColor(selectedItems.contains(holder.mItem) ? Color.GRAY : Color.WHITE);

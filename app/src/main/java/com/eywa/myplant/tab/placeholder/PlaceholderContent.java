@@ -35,9 +35,9 @@ public class PlaceholderContent {
         public boolean status;
         public float intimacy; // 친밀도(호감도)
 
-        public PlaceholderItem(String id, String user, String nickname, String realname, Uri plantImageUri) {
+        public PlaceholderItem(String id, String userId, String nickname, String realname, Uri plantImageUri) {
             this.id = id;
-            this.userId = user;
+            this.userId = userId;
             this.nickname = nickname;
             this.realname = realname;
             this.plantImageUri = plantImageUri;
