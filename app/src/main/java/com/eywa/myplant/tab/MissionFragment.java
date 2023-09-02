@@ -1,59 +1,33 @@
 package com.eywa.myplant.tab;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.eywa.myplant.R;
+import com.eywa.myplant.tab.placeholder.MissionHolderContent;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MissionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class MissionFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MissionFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MissionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MissionFragment newInstance(String param1, String param2) {
-        MissionFragment fragment = new MissionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private static final String ARG_COLUMN_COUNT = "column-count";
+    private int mColumnCount = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
@@ -61,6 +35,25 @@ public class MissionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mission, container, false);
+        View view = inflater.inflate(R.layout.fragment_mission_list, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.mission_recycler_list);
+        Context context = view.getContext();
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        }
+
+        List<MissionHolderContent.MissionHolderItem> items = new ArrayList<>();
+        items.add(new MissionHolderContent.MissionHolderItem("스킨답서스", "물주기", "💦", "10", 0.1f));
+        items.add(new MissionHolderContent.MissionHolderItem("로즈마리", "공유하기", "🎈", "20", 0.2f));
+        items.add(new MissionHolderContent.MissionHolderItem("바질", "햇빛에 3시간 두기", "☀️", "30", 0.3f));
+
+        // Create the adapter with the list of items
+        MissionRecyclerViewAdapter adapter = new MissionRecyclerViewAdapter(items);
+
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 }

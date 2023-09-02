@@ -20,6 +20,6 @@
         android:id="@+id/missionFragment"
         android:name="com.eywa.myplant.tab.MissionFragment"
         android:label="fragment_mission"
-        tools:layout="@layout/fragment_mission" />
+        tools:layout="@layout/fragment_mission_list" />
 
 </navigation>

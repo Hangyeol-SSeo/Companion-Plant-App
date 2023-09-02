@@ -18,8 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.eywa.myplant.MainActivity;
 import com.eywa.myplant.R;
 import com.eywa.myplant.databinding.FragmentMyPageBinding;
+import com.eywa.myplant.tab.ItemFragment;
 
 public class MyPageFragment extends Fragment {
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
@@ -103,7 +105,13 @@ public class MyPageFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().remove(MyPageFragment.this).commit();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, mainActivity.selectedFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

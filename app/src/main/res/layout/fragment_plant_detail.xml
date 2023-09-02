@@ -83,27 +83,27 @@
                 android:id="@+id/item_detail_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/goldman_regular"
                 android:gravity="center_horizontal"
                 android:hint="Plant name"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/goldman_regular"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/item_detail_realname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/sofiasans_regular"
                 android:gravity="center_horizontal"
                 android:hint="plant realname"
-                android:textSize="14sp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/sofiasans_regular"/>
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 android:orientation="vertical">
 
@@ -117,33 +117,33 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/paragraph_margin"
-                        android:background="@drawable/fragment_item_circle"
                         android:layout_weight="1"
+                        android:background="@drawable/fragment_item_circle"
                         android:gravity="center_horizontal"
                         android:text="cycle"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/item_detail_last_water"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/paragraph_margin"
-                        android:background="@drawable/fragment_item_circle"
                         android:layout_weight="1"
+                        android:background="@drawable/fragment_item_circle"
                         android:gravity="center_horizontal"
                         android:text="last water"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/item_detail_Light"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/paragraph_margin"
+                        android:layout_weight="1"
                         android:background="@drawable/fragment_item_circle"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1"
                         android:text="Light"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <View
@@ -156,64 +156,64 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/paragraph_margin">
+                    android:layout_marginBottom="@dimen/paragraph_margin"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="2"
                         android:background="@drawable/fragment_item_round_background"
                         android:gravity="center_horizontal"
-                        android:layout_marginEnd="10dp"
-                        android:padding="5dp"
-                        android:layout_weight="2">
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="UP TO..."
-                            android:textSize="16sp"
                             android:layout_margin="@dimen/text_margin"
-                            android:fontFamily="@font/goldman_regular" />
+                            android:fontFamily="@font/goldman_regular"
+                            android:text="UP TO..."
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:hint="물주기 : D-00"/>
+                            android:hint="물주기 : D-00"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:hint="분갈이 : D-00"/>
+                            android:hint="분갈이 : D-00"
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
                             android:layout_marginBottom="@dimen/text_margin"
-                            android:hint="영양제 : D-00"/>
+                            android:hint="영양제 : D-00"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:orientation="vertical"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="3"
                         android:background="@drawable/fragment_item_round_background"
                         android:gravity="center_horizontal"
-                        android:layout_marginStart="10dp"
-                        android:padding="5dp"
-                        android:layout_weight="3">
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
                             android:layout_marginBottom="@dimen/text_margin"
-                            android:hint="영양제 : D-00"/>
+                            android:hint="영양제 : D-00"
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -222,14 +222,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/goldman_regular"
                     android:text="Condition is..."
-                    android:textSize="18sp"
-                    android:fontFamily="@font/goldman_regular"/>
+                    android:textSize="18sp" />
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ScrollView>
+                    android:layout_height="wrap_content"></ScrollView>
 
             </LinearLayout>
 
@@ -244,6 +243,17 @@
             app:layout_constraintEnd_toEndOf="@+id/item_detail_background_circle"
             app:layout_constraintStart_toStartOf="@+id/item_detail_background_circle"
             app:layout_constraintTop_toTopOf="@+id/item_detail_background_circle" />
+
+        <ImageButton
+            android:id="@+id/toolbar_qr_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/action_qrcode"
+            android:clickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/item_detail_mainlayout"
+            app:layout_constraintEnd_toEndOf="@+id/item_detail_mainlayout"
+            app:layout_constraintTop_toTopOf="@+id/item_detail_image"
+            app:layout_constraintVertical_bias="0.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,20 +31,12 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/toolbar_qr_button"
-                android:layout_width="18dp"
-                android:layout_height="23dp"
-                android:layout_marginTop="27dp"
-                android:clickable="true"
-                android:src="@drawable/action_hamburger_menu" />
-
-            <ImageButton
                 android:id="@+id/toolbar_mypage_button"
                 android:layout_width="27dp"
-                android:layout_height="23dp"
+                android:layout_height="25dp"
                 android:layout_margin="27dp"
                 android:clickable="true"
-                android:src="@drawable/action_mypage" />
+                android:background="@drawable/action_mypage" />
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>

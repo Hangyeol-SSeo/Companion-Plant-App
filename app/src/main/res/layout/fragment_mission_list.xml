@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".tab.MissionFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mission_left_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.125" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/mission_right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.875" />
+
+        <LinearLayout
+            android:id="@+id/mission_point_viewer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/mission_right_guideline"
+            app:layout_constraintStart_toStartOf="@+id/mission_left_guideline"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/goldman_regular"
+                android:text="&lt;" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textSize="12sp"
+                    android:textColor="#883E3A39"
+                    android:fontFamily="@font/goldman_regular"
+                    android:text="My Point" />
+
+                <TextView
+                    android:id="@+id/mission_point_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#FF3E3A39"
+                    android:fontFamily="@font/goldman_regular"
+                    android:text="00 Point" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Mission"
+            android:textSize="24sp"
+            android:textColor="#FF3E3A39"
+            android:fontFamily="@font/goldman_regular"
+            app:layout_constraintEnd_toEndOf="@id/mission_right_guideline"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/mission_left_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/mission_point_viewer" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mission_recycler_list"
+            android:name="com.eywa.myplant.tab.MissionFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".tab.MissionFragment"
+            tools:listitem="@layout/fragment_mission"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

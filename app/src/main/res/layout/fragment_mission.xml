@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".tab.MissionFragment">
+    android:layout_height="wrap_content"
+    android:background="#FFFFFFFF"
+    android:padding="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/mission_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/fragment_item_circle_background"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="☀️"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/mission_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="mission name"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textColor="#883E3A39"
+            android:fontFamily="@font/goldman_regular" />
+
+        <TextView
+            android:id="@+id/mission_target_point"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:text="00 Point"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:fontFamily="@font/goldman_regular" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mission_target_plant"
+        android:layout_width="75dp"
+        android:layout_height="24dp"
+        android:background="@drawable/fragment_item_circle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:hint="plant"
+        android:textSize="10sp"
+        android:fontFamily="@font/goldman_regular" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="&gt;"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/goldman_regular" />
+
+</LinearLayout>
