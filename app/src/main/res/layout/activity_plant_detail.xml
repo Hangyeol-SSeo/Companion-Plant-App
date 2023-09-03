@@ -110,40 +110,34 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
 
-                    <TextView
-                        android:id="@+id/item_detail_watering_cycle"
+                    <ToggleButton
+                        android:id="@+id/item_detail_switch_light"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_marginHorizontal="@dimen/paragraph_margin"
+                        android:background="@drawable/toggle_button_background"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textOn="Light ON"
+                        android:textOff="Light OFF"
+                        android:checked="false"
+                        android:textSize="14sp" />
+
+                    <ToggleButton
+                        android:id="@+id/item_detail_switch_alarm"
+                        android:layout_width="0dp"
+                        android:layout_height="24dp"
                         android:layout_marginHorizontal="@dimen/paragraph_margin"
                         android:layout_weight="1"
-                        android:background="@drawable/fragment_item_circle"
-                        android:gravity="center_horizontal"
-                        android:text="cycle"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/item_detail_last_water"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/paragraph_margin"
-                        android:layout_weight="1"
-                        android:background="@drawable/fragment_item_circle"
-                        android:gravity="center_horizontal"
-                        android:text="last water"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/item_detail_Light"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/paragraph_margin"
-                        android:layout_weight="1"
-                        android:background="@drawable/fragment_item_circle"
-                        android:gravity="center_horizontal"
-                        android:text="Light"
-                        android:textSize="16sp" />
+                        android:background="@drawable/toggle_button_background"
+                        android:gravity="center"
+                        android:textOn="Alarm On"
+                        android:textOff="Alarm OFF"
+                        android:checked="true"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <View
@@ -178,22 +172,25 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/item_detail_temperature_figure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="물주기 : D-00"
+                            android:hint="온도: "
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/item_detail_moisture_figure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="분갈이 : D-00"
+                            android:hint="수분: "
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/item_detail_light_figure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/text_margin"
-                            android:hint="영양제 : D-00"
+                            android:hint="일조량: "
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -211,9 +208,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
                             android:layout_marginBottom="@dimen/text_margin"
-                            android:hint="영양제 : D-00"
-                            android:textSize="12sp" />
+                            android:gravity="center"
+                            android:text="Last update:"
+                            android:textSize="14sp" />
+
+                        <TextClock
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 

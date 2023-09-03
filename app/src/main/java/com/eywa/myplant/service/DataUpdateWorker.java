@@ -1,4 +1,4 @@
-package com.eywa.myplant.data;
+package com.eywa.myplant.service;
 
 public class DataUpdateWorker {
 

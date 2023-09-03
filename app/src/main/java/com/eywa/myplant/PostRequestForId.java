@@ -1,5 +1,7 @@
 package com.eywa.myplant;
 
+import static com.eywa.myplant.Global.SERVER_URL;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -54,7 +56,7 @@ public class PostRequestForId implements Runnable {
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
             //Log.d(log, "2");
 
-            url = new URL("http://10.0.2.2:3000" + requestURL);
+            url = new URL(SERVER_URL + requestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
