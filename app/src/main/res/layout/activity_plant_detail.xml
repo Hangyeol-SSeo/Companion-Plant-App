@@ -203,20 +203,30 @@
                         android:background="@drawable/fragment_item_round_background"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="12dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
                             android:layout_marginBottom="@dimen/text_margin"
                             android:gravity="center"
                             android:text="Last update:"
                             android:textSize="14sp" />
 
-                        <TextClock
+                        <TextView
+                            android:id="@+id/item_detail_update_clock"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="- - -"
+                            android:textSize="10sp"/>
+
+                        <Button
+                            android:id="@+id/item_detail_update_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UPDATE"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/sofiasans_regular" />
 
                     </LinearLayout>
 

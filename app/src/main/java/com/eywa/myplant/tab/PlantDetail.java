@@ -1,13 +1,16 @@
 package com.eywa.myplant.tab;
 
+import static com.eywa.myplant.Global.PREFERENCES_NAME;
 import static com.eywa.myplant.Global.SERVER_URL;
 
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,23 +29,36 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PlantDetail extends AppCompatActivity {
+    public static final String TIME = "recordedTime";
+    public static final String BASE_URL = SERVER_URL + "/data" + "?plantId=";
     private TextView intimacy, realname, nickname;
     private CircleImageView plantImage;
     private ImageButton qrButton, shareButton;
     private ToggleButton lightButton, alarmButton;
     private TextView light_intensity, soil_moisture, temperature;
+    private TextView updateTime;
+    private Button updateButton;
     private BluetoothAdapter bluetoothAdapter;
     private OkHttpClient client = new OkHttpClient();
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -65,11 +81,16 @@ public class PlantDetail extends AppCompatActivity {
         light_intensity = findViewById(R.id.item_detail_light_figure);
         soil_moisture = findViewById(R.id.item_detail_moisture_figure);
         temperature = findViewById(R.id.item_detail_temperature_figure);
+        updateTime = findViewById(R.id.item_detail_update_clock);
+        updateButton = findViewById(R.id.item_detail_update_button);
 
         intimacy.setText("- " +  String.valueOf(plant.intimacy) + " -");
         realname.setText(plant.realname);
         nickname.setText(plant.nickname);
         plantImage.setImageURI(plant.plantImageUri);
+        temperature.setText("온도: " + plant.temperature);
+        soil_moisture.setText("수분: " + plant.soil_moisture);
+        light_intensity.setText("일조량: " + plant.light_intensity);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         qrButton.setOnClickListener(v -> {
@@ -85,12 +106,59 @@ public class PlantDetail extends AppCompatActivity {
 
         lightButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Boolean status = isChecked ? true : false;
-            Toast.makeText(PlantDetail.this, "Toggle is " + status, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PlantDetail.this, "식물 생장 조명 " + status, Toast.LENGTH_SHORT).show();
             sendStatusToServer(status);
         });
 
         alarmButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                Toast.makeText(PlantDetail.this, "알림 ON", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(PlantDetail.this, "알림 OFF.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        // update time 표시
+        sharedPreferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+        // Load the saved time
+        String savedTime = sharedPreferences.getString(TIME, "기록이 없습니다.");
+        updateTime.setText(savedTime);
+
+        updateButton.setOnClickListener(v -> {
+            String url = BASE_URL + plantId;
+            Request request = new Request.Builder().url(url).build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            float light_intensity = (float) jsonObject.getDouble("light_intensity");
+                            float soil_moisture = (float) jsonObject.getDouble("soil_moisture");
+                            float temperature = (float) jsonObject.getDouble("temperature");
+                            float humidity = (float) jsonObject.getDouble("humidity");
+
+                            dbHelper.updateDataByPlantId(plantId, light_intensity, soil_moisture, temperature, humidity);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    recreate(); // 액티비티를 다시 시작합니다.
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            updateAndSaveCurrentTime();
         });
     }
 
@@ -124,6 +192,7 @@ public class PlantDetail extends AppCompatActivity {
         String url = SERVER_URL + "/state?status=" + status;
         Request request = new Request.Builder()
                 .url(url)
+                .post(RequestBody.create(null, new byte[0]))
                 .build();
 
         client.newCall(request).enqueue(new okhttp3.Callback() {
@@ -141,5 +210,17 @@ public class PlantDetail extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void updateAndSaveCurrentTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault());
+        String currentTime = sdf.format(new Date());
+
+        // Save the time to SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TIME, currentTime);
+        editor.apply();
+
+        updateTime.setText(currentTime);
     }
 }

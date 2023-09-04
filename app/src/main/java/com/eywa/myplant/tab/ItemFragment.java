@@ -1,5 +1,7 @@
 package com.eywa.myplant.tab;
 
+import static com.eywa.myplant.Global.PREFERENCES_NAME;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -167,7 +169,7 @@ public class ItemFragment extends Fragment {
 
     private String fetchFromPreferences(String key) {
         Context context = getActivity();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, ""); // Default value is an empty string
     }
 }

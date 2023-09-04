@@ -145,7 +145,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return plant;
     }
 
+    public void updateDataByPlantId(String plantId, float light_intensity, float soil_moisture, float temperature, float humidity) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LIGHT_INTENSITY, light_intensity);
+        values.put(COLUMN_SOIL_MOISTURE, soil_moisture);
+        values.put(COLUMN_TEMPERATURE, temperature);
+        values.put(COLUMN_HUMIDITY, humidity);
 
+        db.update(TABLE_NAME, values, COLUMN_ID + " = ?", new String[]{plantId});
+        db.close();
+    }
 }
 

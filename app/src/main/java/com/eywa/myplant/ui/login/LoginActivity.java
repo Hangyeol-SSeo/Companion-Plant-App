@@ -1,5 +1,7 @@
 package com.eywa.myplant.ui.login;
 
+import static com.eywa.myplant.Global.PREFERENCES_NAME;
+
 import android.app.Activity;
 
 import androidx.lifecycle.Observer;
@@ -165,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveToPreferences(String key, String value) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();
