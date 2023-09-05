@@ -113,6 +113,7 @@ public class DialogAddPlant extends DialogFragment {
                 @Override
                 public void onActivityResult(Uri originalUri) {
                     if (originalUri != null) {
+                        selectedImageUri = originalUri;
                         plantImage.setImageUriAsync(originalUri);
                         plantImage.setAspectRatio(1, 1);
                     }

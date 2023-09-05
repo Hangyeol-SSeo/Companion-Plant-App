@@ -2,11 +2,14 @@ package com.eywa.myplant.tab;
 
 import static com.eywa.myplant.Global.PREFERENCES_NAME;
 import static com.eywa.myplant.Global.SERVER_URL;
+import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,8 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.eywa.myplant.MainActivity;
 import com.eywa.myplant.R;
@@ -94,7 +100,10 @@ public class PlantDetail extends AppCompatActivity {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         qrButton.setOnClickListener(v -> {
-            showQRCodeDialog();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_CODE);
+            }
+            showQRCodeDialog(plantId);
         });
 
         shareButton.setOnClickListener(v -> {
@@ -106,7 +115,7 @@ public class PlantDetail extends AppCompatActivity {
 
         lightButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Boolean status = isChecked ? true : false;
-            Toast.makeText(PlantDetail.this, "식물 생장 조명 " + status, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PlantDetail.this, "LED " + status, Toast.LENGTH_SHORT).show();
             sendStatusToServer(status);
         });
 
@@ -114,7 +123,7 @@ public class PlantDetail extends AppCompatActivity {
             if (isChecked) {
                 Toast.makeText(PlantDetail.this, "알림 ON", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(PlantDetail.this, "알림 OFF.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlantDetail.this, "알림 OFF", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -162,19 +171,21 @@ public class PlantDetail extends AppCompatActivity {
         });
     }
 
-    private void showQRCodeDialog() {
+    private void showQRCodeDialog(String plantId) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_qr);
         ImageView imageView = dialog.findViewById(R.id.qr_image);
-        imageView.setImageBitmap(generateQRCode());
+        imageView.setImageBitmap(generateQRCode(plantId)); // plantId를 인자로 전달
         dialog.show();
     }
 
-    private Bitmap generateQRCode() {
+    private Bitmap generateQRCode(String plantId) {
         String bluetoothAddress = bluetoothAdapter.getAddress();
+        String combinedData = bluetoothAddress + "`" + plantId;
+
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
-            BitMatrix bitMatrix = qrCodeWriter.encode(bluetoothAddress, BarcodeFormat.QR_CODE, 400, 400);
+            BitMatrix bitMatrix = qrCodeWriter.encode(combinedData, BarcodeFormat.QR_CODE, 400, 400);
             Bitmap bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.RGB_565);
             for (int x = 0; x < 400; x++) {
                 for (int y = 0; y < 400; y++) {
@@ -187,6 +198,7 @@ public class PlantDetail extends AppCompatActivity {
             return null;
         }
     }
+
 
     private void sendStatusToServer(boolean status) {
         String url = SERVER_URL + "/state?status=" + status;
@@ -223,4 +235,17 @@ public class PlantDetail extends AppCompatActivity {
 
         updateTime.setText(currentTime);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 권한이 부여됨
+            } else {
+                // 권한이 거부됨
+            }
+        }
+    }
+
 }

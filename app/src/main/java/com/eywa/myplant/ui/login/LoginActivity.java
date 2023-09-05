@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onFailure(String errorMessage) {
             Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+            Log.d("Toast", errorMessage);
         }
     };
 
