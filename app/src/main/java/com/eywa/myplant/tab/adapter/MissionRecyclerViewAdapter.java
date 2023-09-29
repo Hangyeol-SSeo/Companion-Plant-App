@@ -1,16 +1,13 @@
-package com.eywa.myplant.tab;
+package com.eywa.myplant.tab.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.eywa.myplant.databinding.FragmentItemBinding;
 import com.eywa.myplant.databinding.FragmentMissionBinding;
-import com.eywa.myplant.databinding.FragmentMissionListBinding;
 import com.eywa.myplant.tab.placeholder.MissionHolderContent;
 
 import java.util.ArrayList;

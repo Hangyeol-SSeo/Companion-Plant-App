@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eywa.myplant.R;
+import com.eywa.myplant.tab.adapter.MissionRecyclerViewAdapter;
 import com.eywa.myplant.tab.placeholder.MissionHolderContent;
 
 import java.util.ArrayList;

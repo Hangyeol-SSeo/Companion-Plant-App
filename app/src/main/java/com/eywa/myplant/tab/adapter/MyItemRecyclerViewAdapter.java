@@ -1,17 +1,17 @@
-package com.eywa.myplant.tab;
+package com.eywa.myplant.tab.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.eywa.myplant.R;
+import com.eywa.myplant.tab.PlantDetail;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent;
 import com.eywa.myplant.tab.placeholder.PlaceholderContent.PlaceholderItem;
 import com.eywa.myplant.databinding.FragmentItemBinding;

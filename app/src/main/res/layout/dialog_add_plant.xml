@@ -58,13 +58,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/paragraph_margin"
-            android:hint="Plant Name"/>
+            android:hint="식물의 별명을 입력해주세요"/>
 
         <EditText
             android:id="@+id/item_add_realname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Plant Type"/>
+            android:hint="식물 종을 입력해주세요"/>
 
     </LinearLayout>
 </ScrollView>

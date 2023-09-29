@@ -27,9 +27,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * 메인, 추천&도감, 미션, 캐시샵(미정) ok
  *
  * 만들어야 할 페이지
- * 메인 - 식물 나열된 페이지, 각 식물 세부정보 + 공유, qr ok
- * 추천&도감 - ok
- * 미션 - ok
+ * 메인 - 에니메이션 효과 추
+ * 추천&도감 -
+ * 미션 - UI개선 및 미션 내용 생각
+ * 적정온도 / 습도 만족하는지? 체크 후 상태표시
  *
  * 삭제 ###플래너 - 달력, 세부 일기입력(github), https://github.com/kizitonwose/Calendar### ok
  *
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                         .replace(R.id.nav_host_fragment, new MyPageFragment())
                         .addToBackStack(null)
                         .commit();
@@ -87,8 +89,10 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new MissionFragment();
                     }
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                            selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.tab_slide_in, R.anim.tab_slide_out)
+                            .replace(R.id.nav_host_fragment, selectedFragment)
+                            .commit();
 
                     return true;
                 }

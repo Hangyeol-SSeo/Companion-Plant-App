@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -21,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.eywa.myplant.MainActivity;
 import com.eywa.myplant.R;
 import com.eywa.myplant.databinding.FragmentMyPageBinding;
-import com.eywa.myplant.tab.ItemFragment;
 
 public class MyPageFragment extends Fragment {
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
@@ -68,7 +66,7 @@ public class MyPageFragment extends Fragment {
         final Button backButton = binding.mypageBackButton;
         backButton.setVisibility(View.GONE);
 
-        final Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.faid_in);
+        final Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
         final Animation fadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
 
         binding.fullscreenContent.setOnClickListener(new View.OnClickListener() {
