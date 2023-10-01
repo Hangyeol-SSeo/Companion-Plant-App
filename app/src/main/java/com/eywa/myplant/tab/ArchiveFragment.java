@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 import com.eywa.myplant.MainActivity;
 import com.eywa.myplant.R;
@@ -29,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArchiveFragment extends Fragment implements OnBackPressedListener {
-    private WebView myWebView;
+    public static WebView webView;
+    public static LinearLayout linearLayout;
     private SearchView searchView;
     private RecyclerView archiveCategoryRecyclerView;
     private ArchiveCategoryRecyclerViewAdapter archiveCategoryRecyclerViewAdapter;
@@ -41,16 +42,16 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_archive_list, container, false);
 
-        myWebView = (WebView) view.findViewById(R.id.archive_webview);
+        webView = (WebView) view.findViewById(R.id.archive_webview);
+        linearLayout = view.findViewById(R.id.archive_container);
         searchView = view.findViewById(R.id.archive_search);
         archiveCategoryRecyclerView = view.findViewById(R.id.archive_list);
         archiveCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        WebSettings webSettings = myWebView.getSettings();
+        WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("https://nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00376&cntntsNo=12976&totalSearchYn=Y");
+        webView.setWebViewClient(new WebViewClient());
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -61,7 +62,7 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //plantAdapter.getFilter().filter(newText);
+                archiveCategoryRecyclerViewAdapter.filter(newText);
                 return false;
             }
         });
@@ -75,8 +76,8 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
 
     @Override
     public void onBackPressed() {
-        if (myWebView.canGoBack()) {
-            myWebView.goBack();
+        if (webView.canGoBack()) {
+            webView.goBack();
         } else {
             getActivity().onBackPressed();
         }
@@ -90,18 +91,13 @@ public class ArchiveFragment extends Fragment implements OnBackPressedListener {
 
     public ArchiveCategoryRecyclerViewAdapter createArchiveInstance() {
         // 기초 도감 item instance 생성
-        ArchiveHolderContent archiveHolderContent = new ArchiveHolderContent(Uri.parse("https://example.com/image.jpg"), Uri.parse("https://example.com/page.html"), "식물이름1", "종1", "학명1");
-
         List<ArchiveHolderContent> archiveHolderContentList = new ArrayList<>();
-        archiveHolderContentList.add(archiveHolderContent);  // 기초 도감 item을 Recyclerview에 추가
+        archiveHolderContentList.add(new ArchiveHolderContent(Uri.parse("https://nongsaro.go.kr/cms_contents/301/12976_MF_ATTACH_01.jpg"), Uri.parse("https://nongsaro.go.kr/portal/ps/psz/psza/contentSub.ps?menuId=PS00376&cntntsNo=12976&totalSearchYn=Y"), "식물이름1", "종1", "학명1"));  // 기초 도감 item을 Recyclerview에 추가
         ArchiveRecyclerViewAdapter recyclerViewAdapter = new ArchiveRecyclerViewAdapter(archiveHolderContentList);
 
         // category item 추가
-        String categoryName = "ㄱ";
-        ArchiveCategoryHolderContent archiveCategoryHolderContent = new ArchiveCategoryHolderContent(categoryName, recyclerViewAdapter);
-
         List<ArchiveCategoryHolderContent> categoryHolderContentList = new ArrayList<>();
-        categoryHolderContentList.add(archiveCategoryHolderContent);  // category item을 Recyclerview에 추가
+        categoryHolderContentList.add(new ArchiveCategoryHolderContent("ㄱ", recyclerViewAdapter));  // category item을 Recyclerview에 추가
 
         ArchiveCategoryRecyclerViewAdapter archiveCategoryRecyclerViewAdapter = new ArchiveCategoryRecyclerViewAdapter(categoryHolderContentList);
         return archiveCategoryRecyclerViewAdapter;

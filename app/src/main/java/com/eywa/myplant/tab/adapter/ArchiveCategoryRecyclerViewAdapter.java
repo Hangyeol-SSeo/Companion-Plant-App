@@ -38,6 +38,12 @@ public class ArchiveCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Arc
         return categories.size();
     }
 
+    public void filter(String query) {
+        for (ArchiveCategoryHolderContent category : categories) {
+            category.getArchiveRecyclerViewAdapter().getFilter().filter(query);
+        }
+    }
+
     class ArchiveCategoryViewHolder extends RecyclerView.ViewHolder {
         private final TextView categoryTitle;
         private final RecyclerView archiveRecyclerView;
