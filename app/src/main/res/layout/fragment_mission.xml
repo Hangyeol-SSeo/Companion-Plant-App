@@ -47,7 +47,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/mission_target_plant"
+        android:id="@+id/mission_target_time"
         android:layout_width="75dp"
         android:layout_height="24dp"
         android:background="@drawable/fragment_item_circle"
@@ -55,7 +55,7 @@
         android:layout_marginRight="25dp"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:hint="plant"
+        android:hint="time"
         android:textSize="10sp"
         android:fontFamily="@font/goldman_regular" />
 

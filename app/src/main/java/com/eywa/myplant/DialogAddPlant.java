@@ -10,9 +10,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -26,10 +28,12 @@ import com.canhub.cropper.CropImageContract;
 import com.canhub.cropper.CropImageContractOptions;
 import com.canhub.cropper.CropImageOptions;
 import com.canhub.cropper.CropImageView;
+import com.eywa.myplant.data.DatabaseHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class DialogAddPlant extends DialogFragment {
     private OnPlantAddedListener listener;
@@ -51,10 +55,11 @@ public class DialogAddPlant extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_add_plant, null);
 
         EditText nicknameEditText = view.findViewById(R.id.item_add_nickname);
-        EditText realnameEditText = view.findViewById(R.id.item_add_realname);
+        Spinner realnameSpinner = view.findViewById(R.id.item_add_realname);
         plantImage = (CropImageView) view.findViewById(R.id.item_add_plant_image);
         Button selectImageButton = view.findViewById(R.id.item_add_select_image_button);
         Button cropImageButton = view.findViewById(R.id.item_add_crop_image_button);
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
 
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +101,15 @@ public class DialogAddPlant extends DialogFragment {
             }
         });
 
+        List<String> plantNamesKor = dbHelper.getAllPlantNamesKor(dbHelper.getReadableDatabase());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, plantNamesKor);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        realnameSpinner.setAdapter(adapter);
 
         builder.setView(view)
                 .setPositiveButton("Confirm", (dialog, id) -> {
                     String nickname = nicknameEditText.getText().toString();
-                    String realname = realnameEditText.getText().toString();
+                    String realname = realnameSpinner.getSelectedItem().toString();
                     listener.onPlantAdded(nickname, realname, selectedImageUri);
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> DialogAddPlant.this.getDialog().cancel());

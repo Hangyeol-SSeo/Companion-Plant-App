@@ -60,11 +60,10 @@
             android:layout_marginBottom="@dimen/paragraph_margin"
             android:hint="식물의 별명을 입력해주세요"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/item_add_realname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="식물 종을 입력해주세요"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>

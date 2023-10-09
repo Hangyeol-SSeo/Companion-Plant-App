@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.eywa.myplant.R;
 import com.eywa.myplant.tab.PlantDetail;
-import com.eywa.myplant.tab.placeholder.PlaceholderContent;
-import com.eywa.myplant.tab.placeholder.PlaceholderContent.PlaceholderItem;
+import com.eywa.myplant.tab.placeholder.ItemHolderContent;
+import com.eywa.myplant.tab.placeholder.ItemHolderContent.PlaceholderItem;
 import com.eywa.myplant.databinding.FragmentItemBinding;
 
 import java.util.ArrayList;
@@ -31,16 +31,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private boolean selectionMode = false;
     private final Set<PlaceholderItem> selectedItems = new HashSet<>();
 
-    public MyItemRecyclerViewAdapter(List<PlaceholderContent.PlaceholderItem> items) {
+    public MyItemRecyclerViewAdapter(List<ItemHolderContent.PlaceholderItem> items) {
         mValues = new ArrayList<>(items);
     }
 
-    public void addItem(PlaceholderContent.PlaceholderItem item) {
+    public void addItem(ItemHolderContent.PlaceholderItem item) {
         mValues.add(item);
         notifyDataSetChanged();
     }
 
-    public void removeItem(PlaceholderContent.PlaceholderItem item) {
+    public void removeItem(ItemHolderContent.PlaceholderItem item) {
         mValues.remove(item);
         notifyDataSetChanged();
     }

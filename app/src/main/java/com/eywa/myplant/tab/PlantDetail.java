@@ -26,10 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.eywa.myplant.MainActivity;
 import com.eywa.myplant.R;
 import com.eywa.myplant.data.DatabaseHelper;
-import com.eywa.myplant.tab.placeholder.PlaceholderContent;
+import com.eywa.myplant.tab.placeholder.ItemHolderContent;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -37,7 +36,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -53,8 +51,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PlantDetail extends AppCompatActivity {
-    public static final String TIME = "recordedTime";
-    public static final String BASE_URL = SERVER_URL + "/data" + "?plantId=";
+    public static final java.lang.String TIME = "recordedTime";
+    public static final java.lang.String BASE_URL = SERVER_URL + "/data" + "?plantId=";
     private TextView intimacy, realname, nickname;
     private CircleImageView plantImage;
     private ImageButton qrButton, shareButton;
@@ -72,14 +70,14 @@ public class PlantDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_detail);
 
-        String plantId = getIntent().getStringExtra("plantId");
+        java.lang.String plantId = getIntent().getStringExtra("plantId");
         DatabaseHelper dbHelper = new DatabaseHelper(this);
-        PlaceholderContent.PlaceholderItem plant = dbHelper.getPlantById(plantId);
+        ItemHolderContent.PlaceholderItem plant = dbHelper.getPlantById(plantId);
 
         intimacy = findViewById(R.id.item_detail_intimacy);
         realname = findViewById(R.id.item_detail_realname);
         nickname = findViewById(R.id.item_detail_nickname);
-        plantImage = findViewById(R.id.item_detail_image);
+        plantImage = findViewById(R.id.mission_detail_icon);
         qrButton = findViewById(R.id.toolbar_qr_button);
         shareButton = findViewById(R.id.toolbar_share_button);
         lightButton = findViewById(R.id.item_detail_switch_light);
@@ -90,7 +88,7 @@ public class PlantDetail extends AppCompatActivity {
         updateTime = findViewById(R.id.item_detail_update_clock);
         updateButton = findViewById(R.id.item_detail_update_button);
 
-        intimacy.setText("- " +  String.valueOf(plant.intimacy) + " -");
+        intimacy.setText("- " +  java.lang.String.valueOf(plant.intimacy) + " -");
         realname.setText(plant.realname);
         nickname.setText(plant.nickname);
         plantImage.setImageURI(plant.plantImageUri);
@@ -101,7 +99,7 @@ public class PlantDetail extends AppCompatActivity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         qrButton.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_CODE);
+                ActivityCompat.requestPermissions(this, new java.lang.String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_CODE);
             }
             showQRCodeDialog(plantId);
         });
@@ -130,11 +128,11 @@ public class PlantDetail extends AppCompatActivity {
         // update time 표시
         sharedPreferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
         // Load the saved time
-        String savedTime = sharedPreferences.getString(TIME, "기록이 없습니다.");
+        java.lang.String savedTime = sharedPreferences.getString(TIME, "기록이 없습니다.");
         updateTime.setText(savedTime);
 
         updateButton.setOnClickListener(v -> {
-            String url = BASE_URL + plantId;
+            java.lang.String url = BASE_URL + plantId;
             Request request = new Request.Builder().url(url).build();
 
             client.newCall(request).enqueue(new Callback() {
@@ -171,7 +169,7 @@ public class PlantDetail extends AppCompatActivity {
         });
     }
 
-    private void showQRCodeDialog(String plantId) {
+    private void showQRCodeDialog(java.lang.String plantId) {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_qr);
         ImageView imageView = dialog.findViewById(R.id.qr_image);
@@ -179,9 +177,9 @@ public class PlantDetail extends AppCompatActivity {
         dialog.show();
     }
 
-    private Bitmap generateQRCode(String plantId) {
-        String bluetoothAddress = bluetoothAdapter.getAddress();
-        String combinedData = bluetoothAddress + "`" + plantId;
+    private Bitmap generateQRCode(java.lang.String plantId) {
+        java.lang.String bluetoothAddress = bluetoothAdapter.getAddress();
+        java.lang.String combinedData = bluetoothAddress + "`" + plantId;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
@@ -201,7 +199,7 @@ public class PlantDetail extends AppCompatActivity {
 
 
     private void sendStatusToServer(boolean status) {
-        String url = SERVER_URL + "/state?status=" + status;
+        java.lang.String url = SERVER_URL + "/state?status=" + status;
         Request request = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(null, new byte[0]))
@@ -226,7 +224,7 @@ public class PlantDetail extends AppCompatActivity {
 
     private void updateAndSaveCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss", Locale.getDefault());
-        String currentTime = sdf.format(new Date());
+        java.lang.String currentTime = sdf.format(new Date());
 
         // Save the time to SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -237,7 +235,7 @@ public class PlantDetail extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull java.lang.String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

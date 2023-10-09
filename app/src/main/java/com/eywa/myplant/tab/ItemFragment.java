@@ -23,7 +23,7 @@ import com.eywa.myplant.PostRequestForId;
 import com.eywa.myplant.R;
 import com.eywa.myplant.data.DatabaseHelper;
 import com.eywa.myplant.tab.adapter.MyItemRecyclerViewAdapter;
-import com.eywa.myplant.tab.placeholder.PlaceholderContent;
+import com.eywa.myplant.tab.placeholder.ItemHolderContent;
 
 import java.util.List;
 import java.util.UUID;
@@ -51,37 +51,21 @@ public class ItemFragment extends Fragment {
 
     HttpCallback httpCallback = new HttpCallback() {
         @Override
-        public void onSuccess(String message, String idValue) {
+        public void onSuccess(java.lang.String message, java.lang.String idValue) {
             Log.d("postResponse", message + " " + idValue);
             // sharedPreferences를 사용하면 값이 계속 덮어씌워지는 문제 발생
         }
 
         @Override
-        public void onFailure(String errorMessage) {
+        public void onFailure(java.lang.String errorMessage) {
             Log.e("postResponse", errorMessage);
         }
     };
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+    private static final java.lang.String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ItemFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
-        ItemFragment fragment = new ItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -106,9 +90,9 @@ public class ItemFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        String userId = fetchFromPreferences("userId");
+        java.lang.String userId = fetchFromPreferences("userId");
         DatabaseHelper dbHelper = new DatabaseHelper(getContext());
-        List<PlaceholderContent.PlaceholderItem> items = dbHelper.getAllPlantsByUserId(userId);
+        List<ItemHolderContent.PlaceholderItem> items = dbHelper.getAllPlantsByUserId(userId);
 
         MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(items);
         recyclerView.setAdapter(adapter);
@@ -117,20 +101,20 @@ public class ItemFragment extends Fragment {
         Button addButton = view.findViewById(R.id.item_recycler_add);
         addButton.setOnClickListener(v -> {
             DialogAddPlant dialog = new DialogAddPlant((nickname, realname, plantImageUri) -> {
-                String id = UUID.randomUUID().toString(); // generate unique ID
+                java.lang.String id = UUID.randomUUID().toString(); // generate unique ID
 
                 // Sending UUID to the server
-                String url = "/newplant?plantId="+id + "&plantname="+nickname + "&userId="+userId;
+                java.lang.String url = "/newplant?plantId="+id + "&plantname="+nickname + "&userId="+userId;
                 Executor executor = Executors.newSingleThreadExecutor();
                 executor.execute(new PostRequestForId(url, httpCallback));
 
-                PlaceholderContent.PlaceholderItem newItem = new PlaceholderContent.PlaceholderItem(id, userId, nickname, realname, plantImageUri);
+                ItemHolderContent.PlaceholderItem newItem = new ItemHolderContent.PlaceholderItem(id, userId, nickname, realname, plantImageUri);
 
                 // Save data to local SQLite database
-                dbHelper.addPlant(newItem);
+                dbHelper.addPlantItem(newItem);
                 adapter.addItem(newItem);
 
-                PlaceholderContent.addItem(newItem);
+                ItemHolderContent.addItem(newItem);
                 recyclerView.getAdapter().notifyDataSetChanged();
             });
             dialog.show(getChildFragmentManager(), "addPlantDialog");
@@ -141,10 +125,10 @@ public class ItemFragment extends Fragment {
         delButton.setOnClickListener(v -> {
             if (adapter.isSelectionMode()) {
                 // Delete selected items
-                List<PlaceholderContent.PlaceholderItem> selectedItems = adapter.getSelectedItems();
-                for (PlaceholderContent.PlaceholderItem item : selectedItems) {
+                List<ItemHolderContent.PlaceholderItem> selectedItems = adapter.getSelectedItems();
+                for (ItemHolderContent.PlaceholderItem item : selectedItems) {
                     // Delete item from server
-                    String url = "/rmplant?plantId="+item.id;
+                    java.lang.String url = "/rmplant?plantId="+item.id;
                     Executor executor = Executors.newSingleThreadExecutor();
                     executor.execute(new PostRequestForId(url, httpCallback));
 
@@ -152,7 +136,7 @@ public class ItemFragment extends Fragment {
                     dbHelper.deletePlant(item);
 
                     // Delete item from RecyclerView
-                    PlaceholderContent.removeItem(item);
+                    ItemHolderContent.removeItem(item);
                     adapter.removeItem(item);
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -167,7 +151,7 @@ public class ItemFragment extends Fragment {
         return view;
     }
 
-    private String fetchFromPreferences(String key) {
+    private java.lang.String fetchFromPreferences(java.lang.String key) {
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(key, ""); // Default value is an empty string

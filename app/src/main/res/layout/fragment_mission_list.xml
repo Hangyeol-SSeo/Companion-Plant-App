@@ -70,7 +70,7 @@
                     android:textStyle="bold"
                     android:textColor="#FF3E3A39"
                     android:fontFamily="@font/goldman_regular"
-                    android:text="00 Point" />
+                    android:text="23 Point" />
             </LinearLayout>
         </LinearLayout>
 

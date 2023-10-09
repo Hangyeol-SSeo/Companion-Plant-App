@@ -6,12 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.eywa.myplant.data.DatabaseHelper;
 import com.eywa.myplant.tab.ArchiveFragment;
 import com.eywa.myplant.tab.ItemFragment;
 import com.eywa.myplant.tab.MissionFragment;
@@ -27,10 +29,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * 메인, 추천&도감, 미션, 캐시샵(미정) ok
  *
  * 만들어야 할 페이지
- * 메인 - 에니메이션 효과 추
- * 추천&도감 -
+ * 메인 - 에니메이션 효과 추가 ok
+ * 추천&도감 - ok
  * 미션 - UI개선 및 미션 내용 생각
- * 적정온도 / 습도 만족하는지? 체크 후 상태표시
+ * TODO: 미션 상세페이지 + 미션 완료 시 삭제기능
+ * TODO: 적정온도 / 습도 만족하는지 체크. ArchiveHolderContent에 저장된 값 이용
+ * TODO: 캐릭터 만들어서 선택 및 라즈베리파이 캐릭터 표시
+ * TODO: Google Cloud Server열고 테스트 
  *
  * 삭제 ###플래너 - 달력, 세부 일기입력(github), https://github.com/kizitonwose/Calendar### ok
  *
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ImageButton mypageButton = findViewById(R.id.toolbar_mypage_button);
+
         mypageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     private OnBackPressedListener onBackPressedListener;
 
+
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
     }
@@ -112,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }

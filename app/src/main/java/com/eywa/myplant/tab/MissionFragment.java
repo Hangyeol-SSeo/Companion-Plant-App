@@ -18,6 +18,7 @@ import com.eywa.myplant.tab.placeholder.MissionHolderContent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MissionFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -47,9 +48,9 @@ public class MissionFragment extends Fragment {
         }
 
         List<MissionHolderContent.MissionHolderItem> items = new ArrayList<>();
-        items.add(new MissionHolderContent.MissionHolderItem("스킨답서스", "물주기", "💦", "10", 0.1f));
-        items.add(new MissionHolderContent.MissionHolderItem("로즈마리", "공유하기", "🎈", "20", 0.2f));
-        items.add(new MissionHolderContent.MissionHolderItem("바질", "햇빛에 3시간 두기", "☀️", "30", 0.3f));
+        items.add(new MissionHolderContent.MissionHolderItem("3 Days Left", "물주기", "💦", "10", 0.1f));
+        items.add(new MissionHolderContent.MissionHolderItem("4 Days Left", "공유하기", "🎈", "20", 0.2f));
+        items.add(new MissionHolderContent.MissionHolderItem("1 Days Left", "햇빛에 3시간 두기", "☀️", "30", 0.3f));
 
         // Create the adapter with the list of items
         MissionRecyclerViewAdapter adapter = new MissionRecyclerViewAdapter(items);

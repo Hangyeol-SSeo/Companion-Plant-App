@@ -59,7 +59,7 @@ public class ArchiveCategoryRecyclerViewAdapter extends RecyclerView.Adapter<Arc
         }
 
         public void bind(ArchiveCategoryHolderContent category) {
-            categoryTitle.setText(category.categoryName);
+            categoryTitle.setText(category.categoryName.toString());
             archiveRecyclerViewAdapter.setItems(category.archiveRecyclerViewAdapter.getItems());  // Assume getItems() returns the list of items
         }
     }

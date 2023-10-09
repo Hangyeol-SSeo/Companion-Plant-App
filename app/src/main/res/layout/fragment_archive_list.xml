@@ -29,21 +29,15 @@
             android:fontFamily="@font/goldman_regular"
             android:background="@drawable/fragment_item_circle" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/archive_list"
+            android:name="com.eywa.myplant.tab.ArchiveFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/archive_list"
-                android:name="com.eywa.myplant.tab.ArchiveFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:layoutManager="LinearLayoutManager"
-                tools:context=".tab.ArchiveFragment"
-                tools:listitem="@layout/fragment_archive_category" />
-
-        </ScrollView>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:layoutManager="LinearLayoutManager"
+            tools:context=".tab.ArchiveFragment"
+            tools:listitem="@layout/fragment_archive_category" />
 
     </LinearLayout>
 

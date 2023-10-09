@@ -5,9 +5,9 @@ import android.net.Uri;
 public class ArchiveHolderContent {
     public final Uri imageUri;
     public final Uri pageUri;
-    public final String plantNameKor;
-    public final String species;
-    public final String scientificName;
+    public final java.lang.String plantNameKor;
+    public final java.lang.String species;
+    public final java.lang.String scientificName;
 
     // 물, 조도, 일조량, 습도
     public final int temperature_min, temperature_max; // 생육 온도 최소 / 최대 (단위: 섭씨)
@@ -15,7 +15,7 @@ public class ArchiveHolderContent {
     public final int light_intensity_min, light_intensity_max; // 일조량 최소 / 최대 (단위: 시간)
     public final int soil_moisture_limit; // 물을 줘야 할 때 (흙이 마른 정도) (단위: cm)
 
-    public ArchiveHolderContent (Uri imageUri, Uri pageUri, String plantNameKor, String species, String scientificName,
+    public ArchiveHolderContent (Uri imageUri, Uri pageUri, java.lang.String plantNameKor, java.lang.String species, java.lang.String scientificName,
                                  int temperature_min, int temperature_max,
                                  int humidity_min, int humidity_max,
                                  int light_intensity_min, int light_intensity_max, int soil_moisture_limit) {
